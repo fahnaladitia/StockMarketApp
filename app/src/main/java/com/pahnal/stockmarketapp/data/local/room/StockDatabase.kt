@@ -7,6 +7,7 @@ import com.pahnal.stockmarketapp.data.local.entity.CompanyListingEntity
 @Database(
     entities = [CompanyListingEntity::class],
     version = 1,
+    exportSchema = false
 )
 abstract class StockDatabase : RoomDatabase() {
     abstract val dao: StockDao

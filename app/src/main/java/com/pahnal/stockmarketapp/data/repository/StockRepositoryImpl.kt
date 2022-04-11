@@ -1,7 +1,7 @@
 package com.pahnal.stockmarketapp.data.repository
 
 import com.pahnal.stockmarketapp.data.csv.CSVParser
-import com.pahnal.stockmarketapp.data.local.room.StockDao
+import com.pahnal.stockmarketapp.data.local.room.StockDatabase
 import com.pahnal.stockmarketapp.data.mapper.toCompanyListing
 import com.pahnal.stockmarketapp.data.mapper.toCompanyListingEntity
 import com.pahnal.stockmarketapp.data.remote.network.StockApi
@@ -17,10 +17,12 @@ import javax.inject.Singleton
 
 @Singleton
 class StockRepositoryImpl @Inject constructor(
-    private val dao: StockDao,
+    private val db: StockDatabase,
     private val api: StockApi,
     private val companyListingsParser: CSVParser<CompanyListing>,
 ) : IStockRepository {
+
+    private val dao = db.dao
 
     override suspend fun getCompanyListing(
         fetchFromRemote: Boolean,
